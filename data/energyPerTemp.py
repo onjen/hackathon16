@@ -12,7 +12,7 @@ def findall(L, value, start=0):
     except ValueError:
         pass
 
-def main():
+def readData():
     outdoor_acc = []
     kwh_acc = []
     steps_per_day = 2*60*24
@@ -69,15 +69,23 @@ def main():
         temps.append(item[0])
         kwh.append(item[1])
 
-    x = np.array(temps)
-    y = np.array(kwh)
+    return {'temps':temps,'kwh':kwh}
+
+def getRegressionFor(x, y, xp):
     z = np.polyfit(x, y, 1)
 
     print z
     
     p = np.poly1d(z)
+    return p(xp)
+
+def main():
+    data = readData();
+    x = np.array(data['temps'])
+    y = np.array(data['kwh'])
+
     xp = np.linspace(-7, 12, 100)
-    _ = plt.plot(x, y, '-', xp, p(xp), '-')
+    _ = plt.plot(x, y, '-', xp, getRegressionFor(x,y,xp), '-')
     plt.ylim(0,0.2)
     plt.show()
 
