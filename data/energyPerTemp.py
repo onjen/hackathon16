@@ -48,7 +48,7 @@ def readData():
         if temp < min_temp:
             min_temp = temp
 
-    print "Temp range is from " + str(float(min_temp)/10) + " until " + str(float(max_temp)/10)
+    #print "Temp range is from " + str(float(min_temp)/10) + " until " + str(float(max_temp)/10)
 
     energy_per_temp = []
     current_temp = min_temp
@@ -61,8 +61,6 @@ def readData():
             energy_per_temp.append([float(current_temp)/10, kwh/count])
         current_temp += 1
 
-    print energy_per_temp
-
     temps = []
     kwh = []
     for item in energy_per_temp:
@@ -73,9 +71,6 @@ def readData():
 
 def getRegressionFor(x, y, xp):
     z = np.polyfit(x, y, 1)
-
-    print z
-    
     p = np.poly1d(z)
     return p(xp)
 
