@@ -1,11 +1,10 @@
 import csv
 import matplotlib.pyplot as plt
 
-def get_arrays(filename):
+def get_arrays(filename, days):
     outdoor = []
     kwh = []
     target = []
-    days = 1
     with open(filename, 'rb') as csvfile:
         reader = csv.reader(csvfile, delimiter=';')
         max_count = 2*60*24*days
@@ -24,7 +23,7 @@ def get_arrays(filename):
 
 
 def main():
-    arrays = get_arrays('Anlage3.csv')
+    arrays = get_arrays('Anlage3.csv', 1)
     
     fig, ax1 = plt.subplots()
     ax1.plot(arrays['outdoor'], 'b-')
