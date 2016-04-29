@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% block body %}
+<script type="text/javascript">
+  $(function(name) {
+    var submit_form = function(e) {
+      $.getJSON($SCRIPT_ROOT + '/' + name,
+      function(data) {
+        $('#arrays').text(data.result);
+        $('input[name=a]').focus().select();
+      });
+      return false;
+    };
+
+    $('a#anlage3').bind('click', submit_form);
+
+    $('input[type=text]').bind('keydown', function(e) {
+      if (e.keyCode == 13) {
+        submit_form(e);
+      }
+    });
+
+    $('input[name=a]').focus();
+  });
+</script>
+<h1>jQuery Example</h1>
+<p>
+<p><a href=# id="anlage3">Anlage3</a>
+  <input type="text" size="5" name="a"> +
+  <input type="text" size="5" name="b"> =
+  <span id="result">?</span>
+    <div id="chart_div"></div>
+
+{% endblock %}
