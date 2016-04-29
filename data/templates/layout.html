@@ -7,6 +7,48 @@
   var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
 </script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+      google.charts.load('current', {'packages':['gauge']});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['Außen', 11],
+          ['Innen', 20],
+          ['Soll', 21]
+        ]);
+
+        var options = {
+          width: 400, height: 120,
+          minorTicks: 5,
+	  greenFrom: 15, greenTo: 25,
+	  animation:{
+		  duration:20000,
+		  easing:'linear',
+	  },
+	  max:40,
+	  min:-10
+        };
+
+        var chart = new google.visualization.Gauge(document.getElementById('gauge'));
+
+        chart.draw(data, options);
+
+        setInterval(function() {
+          data.setValue(0, 1, 5 + Math.round(20 * Math.random()));
+          chart.draw(data, options);
+        }, 6500);
+        setInterval(function() {
+          data.setValue(1, 1, 5 + Math.round(20 * Math.random()));
+          chart.draw(data, options);
+        }, 5000);
+        setInterval(function() {
+          data.setValue(2, 1, 10 + Math.round(5 * Math.random()));
+          chart.draw(data, options);
+        }, 13000);
+      }
+</script>
 
 <script type="text/javascript">
 
