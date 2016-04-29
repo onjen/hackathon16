@@ -12,14 +12,11 @@ for i in xrange(1, 6):
             if reader.line_num == 1:
                 continue
             date = int(time.mktime(time.strptime(row[0], "%Y-%m-%d %H:%M:%S")))
-            print date
             outdoor = float(row[1])
             target = float(row[1])
             kwh = float(row[3])
 
-            conn.execute("INSERT INTO DATA (TIME, OUTDOOR, TARGET, ENERGY) \
-                          VALUES (" + str(date) + "," + str(outdoor) + "," + str(target) + "," + str(kwh) + ")");
+            conn.execute("INSERT INTO DATA (TIME, OUTDOOR, TARGET, ENERGY) VALUES (" + str(date) + "," + str(outdoor) + "," + str(target) + "," + str(kwh) + ")");
 
-
-
+conn.commit()
 conn.close()
