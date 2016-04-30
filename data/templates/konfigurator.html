@@ -22,13 +22,13 @@
   $(function() {
     $( "#radio" ).buttonset();
     $( "#radio_az" ).buttonset();
-    $$('#radio1').click(function(){
+    $('#radio1').click(function(){
         $('.toggle').hide();
     });
     $('#radio2').click(function(){
         $('.toggle').show();
     });
-		('#radio3').click(function(){
+		$('#radio3').click(function(){
         $('.toggle2').hide();
     });
     $('#radio4').click(function(){
@@ -39,17 +39,17 @@
 
 <div style="margin-left: 300px; margin-top: 20px;">
 	<div class="rcorners2">
-		Wohnzimmer
+		<b>Wohnzimmer</b>
 		<br />
 		<br />
 		Dauerbeheizt: 
 		<br />
 		<br />
 		<div id="radio">
-			<input type="radio" id="radio1" name="radio"><label for="radio1">An</label>
-			<input type="radio" id="radio2" name="radio" checked="checked"><label for="radio2">Aus</label>
+			<input type="radio" id="radio1" name="radio" checked="checked"><label for="radio1">An</label>
+			<input type="radio" id="radio2" name="radio"><label for="radio2">Aus</label>
 		</div>
-		<div class="toggle">
+		<div class="toggle"  style="display:none">
 			<form id="temperature">
 				<br />
 				<label for="min">Heizen f&uuml;r</label>
@@ -69,15 +69,15 @@
 		</div>
 	</div>
 	<div class="rcorners2">
-		Arbeitszimmer
+		<b>Arbeitszimmer</b>
 		<br />
 		<br />
 		Dauerbeheizt: 
 		<br />
 		<br />
 		<div id="radio_az">
-			<input type="radio" id="radio3" name="radio_az" checked="checked"><label for="radio3">An</label>
-			<input type="radio" id="radio4" name="radio_az"><label for="radio4">Aus</label>
+			<input type="radio" id="radio3" name="radio_az"><label for="radio3">An</label>
+			<input type="radio" id="radio4" name="radio_az" checked="checked"><label for="radio4">Aus</label>
 		</div>
 		<div class="toggle2">
 			<form id="temperature">
