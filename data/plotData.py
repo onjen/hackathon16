@@ -5,6 +5,8 @@ def get_arrays(filename, days):
     outdoor = []
     kwh = []
     target = []
+    json = []
+    print(type(json))
     with open(filename, 'rb') as csvfile:
         reader = csv.reader(csvfile, delimiter=';')
         max_count = 2*60*24*days
@@ -18,8 +20,11 @@ def get_arrays(filename, days):
             outdoor.append(row[1])
             target.append(row[2])
             kwh.append(row[3])
+            cur_dic = { "count": count, "outdoor": row[1], "target": row[2], "kwh": row[3] } 
+            json.append( cur_dic )
             count += 1
-    return {'outdoor':outdoor, 'kwh':kwh, 'target':target}
+    print(json)
+    return {'outdoor':outdoor, 'kwh':kwh, 'target':target, 'json':json}
 
 
 def main():

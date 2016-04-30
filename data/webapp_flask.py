@@ -10,6 +10,7 @@ from plotData import get_arrays
     :license: BSD, see LICENSE for more details.
 """
 from flask import Flask, jsonify, render_template, request
+import json
 app = Flask(__name__)
 
 
@@ -24,12 +25,29 @@ def add_numbers():
 def index():
     return render_template('index.html')
 
-@app.route('/Anlage3')
+@app.route('/Anlage1')
 def anlage3():
     print("test")
-    arrays = get_arrays('Anlage3.csv', 1)
+    rates = []
+    arrays = get_arrays('Anlage1.csv', 1)
+#    rates = json.dumps(arrays)
 
-    return jsonify(arrays=arrays)
+#    print(json.dumps(arrays))
+#    outdoordata = json.loads(json.dumps(arrays['outdoor']), parse_float=float)
+#    khwdata     = json.loads(arrays['d_kwh'], parse_float=float)
+#    targetdata  = json.loads(arrays['d_target'], parse_float=float)
+
+#    rates.append( rdata['outdoor'] )
+#    rates.append( rdata['kwh'] )
+#    rates.append( rdata['target'] )
+
+#    return jsonify(arrays['json'])
+    string = '[' + ', '.join(str(e) for e in arrays['json']) + ']'
+    string = string.replace('\'', '\"')
+#    return ', '.join(str(e) for e in arrays['json'])
+    return string
+#    return render_template('index.html', **locals())
 
 if __name__ == '__main__':
+    app.debug = True
     app.run('0.0.0.0')
