@@ -79,6 +79,21 @@
               // Gives each series an axis name that matches the Y-axis below.
               0: {axis: 'Count'},
             },
+            vAxes: {
+                  0: {},
+                  1: {viewWindowMode:'explicit',
+                      viewWindow:{
+                                  max:0.5,
+                                  min:0
+                                  },
+                      gridlines: {color: 'transparent'},
+                      },
+                  },
+              series: {0: {targetAxisIndex:1},
+                   1:{targetAxisIndex:0},
+                   2:{targetAxisIndex:0},
+                   3:{targetAxisIndex:0},
+                  },
             axes: {
               // Adds labels to each axis; they don't have to match the axis names.
               y: {
