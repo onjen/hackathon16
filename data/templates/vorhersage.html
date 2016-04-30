@@ -135,14 +135,15 @@
 <label for="burger-check" class="burger"></label>
 <nav id="navigation1" class="navigation">
   <ul>
-    <li><a href="#">Start</a></li>
-    <li><a href="vorhersage.html">Vorhersage</a></li>
-    <li><a href="#">Zielrechner</a></li>
-    <li><a href="#">Raumkonfigurator</a></li>
-    <li><a href="#">Heizverhalten</a></li>
+    <li><a href="{{url_for('index')}}">Start</a></li>
+    <li><a href="{{url_for('vorhersage')}}">Vorhersage</a></li>
+    <li><a href="{{url_for('zielrechner')}}#">Zielrechner</a></li>
+    <li><a href="{{url_for('konfigurator')}}">Raumkonfigurator</a></li>
+    <li><a href="{{url_for('verhalten')}}">Heizverhalten</a></li>
   </ul>
 </nav>
-<div id="vorhersage"></div>
 </div>
+<h1 class="heading">Energieverbrauch der nächsten 7 Tage</h1>
+<div id="vorhersage"></div>
 
 {% endblock %}
