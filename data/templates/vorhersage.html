@@ -1,18 +1,39 @@
 {% extends "layout.html" %}
 {% block body %}
+<script type="text/javascript">
+  $(function(name) {
+    var submit_form = function(e) {
+      $.getJSON($SCRIPT_ROOT + '/' + name,
+      function(data) {
+        $('#arrays').text(data.result);
+        $('input[name=a]').focus().select();
+      });
+      return false;
+    };
+
+    $('a#anlage3').bind('click', submit_form);
+
+    $('input[type=text]').bind('keydown', function(e) {
+      if (e.keyCode == 13) {
+        submit_form(e);
+      }
+    });
+
+    $('input[name=a]').focus();
+  });
+</script>
 <div id="header">
 	<h1 style="float:left">Heating Manager</h1>
 	<div id="gauge"></div>
 	<img id="logo" src="static/Viessmann_Logo.jpg">
 </div>
-<div id="chart_div"></div>
 <div id="nav">
 <input class="burger-check" id="burger-check" type="checkbox">
 <label for="burger-check" class="burger"></label>
 <nav id="navigation1" class="navigation">
   <ul>
     <li><a href="#">Start</a></li>
-    <li><a href="{{url_for('vorhersage')}}">Vorhersage</a></li>
+    <li><a href="vorhersage.html">Vorhersage</a></li>
     <li><a href="#">Zielrechner</a></li>
     <li><a href="#">Raumkonfigurator</a></li>
     <li><a href="#">Heizverhalten</a></li>

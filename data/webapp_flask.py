@@ -32,6 +32,10 @@ def anlage3():
     string = string.replace('\'', '\"')
     return string
 
+@app.route('/Vorhersage')
+def vorhersage():
+    return render_template('vorhersage.html', title='vorhersage')
+
 if __name__ == '__main__':
     app.debug = True
     app.run('0.0.0.0')
