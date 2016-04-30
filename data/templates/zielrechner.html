@@ -1,0 +1,84 @@
+{% extends "layout.html" %}
+{% block body %}
+<div id="header">
+	<h1 style="float:left">Heating Manager</h1>
+	<div id="gauge"></div>
+	<img id="logo" src="static/Viessmann_Logo.jpg">
+</div>
+<div id="nav">
+<input class="burger-check" id="burger-check" type="checkbox">
+<label for="burger-check" class="burger"></label>
+<nav id="navigation1" class="navigation">
+  <ul>
+    <li><a href="/">Start</a></li>
+    <li><a href="{{url_for('vorhersage')}}">Vorhersage</a></li>
+    <li><a href="#">Zielrechner</a></li>
+    <li><a href="">Raumkonfigurator</a></li>
+    <li><a href="{{url_for('verhalten')}}">Heizverhalten</a></li>
+  </ul>
+</nav>
+</div>
+<script type="text/javascript">
+var values_euro = {13: 0.03268964, 14: 0.03408221, 15: 0.03547477, 16: 0.03686734, 17: 0.0382599, 18: 0.03965247, 19: 0.04104504, 20:0.0424376, 21: 0.04383017, 22: 0.04522274, 23: 0.0466153};
+
+var tarif_costs = 0.08;
+
+$(function() {
+    var select = $( "#min" );
+    var slider = $( "<div id='slider_cost'></div>" ).insertAfter( select ).slider({
+      min: 13,
+      max: 23,
+      range: "min",
+      value: select[ 0 ].selectedIndex + 13,
+      slide: function( event, ui ) {
+        select[ 0 ].selectedIndex = ui.value - 13;
+				var cost = values_euro[ui.value];
+				$.getJSON($SCRIPT_ROOT + '/_guessEnergy', {
+				        euro: cost
+				      }, function(data) {
+                                        $("#cost").text((data.result[0] * tarif_costs) + " EUR");
+                                        $("#temperature").text((data.result[1]) + " EUR");
+				      });
+      }
+    });
+    $( "#min" ).change(function() {
+      slider.slider( "value", this.selectedIndex + 13 );
+			var cost = values_euro[this.selectedIndex + 13];
+                                $.getJSON($SCRIPT_ROOT + '/_guessEnergy', {
+                                        euro: cost
+                                      }, function(data) {
+                                        $("#cost").text((data.result[0] * tarif_costs) + " EUR");
+                                        $("#temperature").text((data.result[1]) + " EUR");
+                                      });
+
+			cost = Number((cost).toFixed(2));
+			$("#cost").text(cost + "EUR");
+    });
+  });
+</script>
+
+<form id="money_current">
+  <label for="min">Aktuelle Kosten € / Tag</label>
+  <select name="min" id="min">
+    <option>13</option>
+    <option>14</option>
+    <option>15</option>
+    <option>16</option>
+    <option>17</option>
+    <option>18</option>
+    <option>19</option>
+    <option>20</option>
+    <option>21</option>
+    <option>22</option>
+    <option>23</option>
+  </select>
+</form>
+<br />
+<br />
+<br />
+<br />
+
+<div><br/>Kosten: <span id="cost"></span></div>
+<div><br/>Einstellbare Wärme: <span id="temperature"></span></div>
+
+{% endblock %}

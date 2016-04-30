@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from plotData import get_arrays
+from guessEnergy import guess_inverse, guess
 from weatherIntegration import getJSON
 """
     WebApp Viessmann
@@ -44,6 +45,10 @@ def temperatures():
 def vorhersage():
     return render_template('vorhersage.html', title='vorhersage')
 
+@app.route('/Zielrechner')
+def zielrechner():
+    return render_template('zielrechner.html', title='vorhersage')
+
 @app.route('/Verhalten')
 def verhalten():
     return render_template('verhalten.html')
@@ -52,6 +57,13 @@ def verhalten():
 def konfigurator():
     return render_template('konfigurator.html')
 
+@app.route('/_guessEnergy')
+def guess_energy():
+    euro = request.args.get('euro', 0, type=float)
+    result = {}
+    result[0] = guess_inverse(euro)
+    result[1] = guess(euro)
+    return jsonify(result=result)
 
 if __name__ == '__main__':
     app.debug = True

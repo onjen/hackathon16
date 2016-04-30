@@ -154,3 +154,15 @@ li a:hover {
     height: 150px;    
 		float: left;
 }
+
+#slider_current {
+  margin-left: 300px;
+	margin-right: 25px;
+  /*float:left;*/
+}
+
+#slider_desired {
+  margin-left: 300px;
+	margin-right: 25px;
+  /*float:left;*/
+}
