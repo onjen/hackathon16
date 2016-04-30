@@ -1,5 +1,113 @@
 {% extends "layout.html" %}
 {% block body %}
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+      google.charts.load('current', {'packages':['gauge', 'corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['Außen', 11],
+          ['Innen', 20],
+          ['Soll', 21]
+        ]);
+
+        var options = {
+          width: 400, height: 80,
+          minorTicks: 5,
+	  greenFrom: 15, greenTo: 25,
+	  animation:{
+		  duration:2000,
+		  easing:'linear',
+	  },
+	  max:40,
+	  min:-10
+        };
+
+        var chart = new google.visualization.Gauge(document.getElementById('gauge'));
+
+        chart.draw(data, options);
+
+        setInterval(function() {
+          data.setValue(0, 1, 5 + Math.round(20 * Math.random()));
+          chart.draw(data, options);
+        }, 5000);
+        setInterval(function() {
+          data.setValue(1, 1, 5 + Math.round(20 * Math.random()));
+          chart.draw(data, options);
+        }, 4000);
+        setInterval(function() {
+          data.setValue(2, 1, 10 + Math.round(5 * Math.random()));
+          chart.draw(data, options);
+        }, 10000);
+
+
+
+      $.getJSON('\\Anlage1', function(data) {
+          var tableData = new google.visualization.DataTable();
+
+          tableData.addColumn('number', 'Count');
+          tableData.addColumn('number', 'Kwh');
+          tableData.addColumn('number', 'Outdoor');
+          tableData.addColumn('number', 'Target');
+
+          $.each(data, function(index) {
+              tableData.addRow([
+                parseFloat(data[index].count),
+                parseFloat(data[index].kwh),
+                parseFloat(data[index].outdoor),
+                parseFloat(data[index].target)
+            ]);
+          });
+
+
+
+          var materialOptions = {
+            chart: {
+              title: 'Average Temperatures and Daylight in Iceland Throughout the Year'
+            },
+            width: 900,
+            height: 500,
+            series: {
+              // Gives each series an axis name that matches the Y-axis below.
+              0: {axis: 'Count'},
+            },
+            vAxes: {
+                  0: {},
+                  1: {viewWindowMode:'explicit',
+                      viewWindow:{
+                                  max:0.5,
+                                  min:0
+                                  },
+                      gridlines: {color: 'transparent'},
+                      },
+                  },
+              series: {0: {targetAxisIndex:1},
+                   1:{targetAxisIndex:0},
+                   2:{targetAxisIndex:0},
+                   3:{targetAxisIndex:0},
+                  },
+            axes: {
+              // Adds labels to each axis; they don't have to match the axis names.
+              y: {
+                Kwh: {label: 'Kwh'},
+                Outdoor: {label: 'Outdoor'},
+                Target: {label: 'Target'},
+                Daylight: {label: 'Daylight'}
+              }
+            }
+          };
+ 
+          // Instantiate and draw our chart, passing in some options.
+          var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+          chart.draw(tableData, materialOptions);
+
+          });
+      }
+</script>
+
+
 <div id="header">
 	<h1 style="float:left">Heating Manager</h1>
 	<div id="gauge"></div>
