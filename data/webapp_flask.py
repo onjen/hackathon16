@@ -35,9 +35,10 @@ def anlage3():
 
 @app.route('/Temperatures')
 def temperatures():
-    temperatures = getJSONMeanTemperatures()
-    print temperatures
-    return temperatures
+    temperatures = getJSON()
+    string = '[' + ', '.join(str(e) for e in temperatures) + ']'
+    string = string.replace('\'', '\"')
+    return string
 
 @app.route('/Vorhersage')
 def vorhersage():

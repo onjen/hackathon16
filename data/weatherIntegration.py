@@ -30,7 +30,9 @@ def getJSON():
     temps = getMeanTemperatures()
     energies = getRegressionEnergy()
     for i in range(0,len(temps)):
-        dump.append({"temperature" : temps[i], "energy" : energies[i]})
+        if energies[i] < 0:
+            energies[i] = 0
+        dump.append({"temperature": temps[i], "energy": energies[i]})
     return dump
 
 def main():
