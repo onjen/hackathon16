@@ -48,6 +48,10 @@ def vorhersage():
 def verhalten():
     return render_template('verhalten.html')
 
+@app.route('/Konfigurator')
+def konfigurator():
+    return render_template('konfigurator.html')
+
 
 if __name__ == '__main__':
     app.debug = True

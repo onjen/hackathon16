@@ -144,3 +144,13 @@ li a:hover {
 #vorhersage{
 	margin-left: 300px;
 }
+
+.rcorners2 {
+    border-radius: 25px;
+    border: 2px solid #FF1C01;
+    padding: 20px; 
+		margin: 10px;
+    width: 200px;
+    height: 150px;    
+		float: left;
+}
