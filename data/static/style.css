@@ -18,6 +18,9 @@
 	float:right;
 	margin-top:0px;
 }
+#chart_div{
+        float: left;
+}
 body{
 	margin: 0px;
   font-family: sans-serif;
