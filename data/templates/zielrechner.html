@@ -36,8 +36,10 @@ $(function() {
 				$.getJSON($SCRIPT_ROOT + '/_guessEnergy', {
 				        euro: cost
 				      }, function(data) {
-                                        $("#cost").text((data.result[0] * tarif_costs) + " EUR");
-                                        $("#temperature").text((data.result[1]) + " EUR");
+					var local_0 = Number((data.result[0] * tarif_costs).toFixed(2))
+                                        $("#cost").text(local_0 + " EUR");
+					var local_1 = Number((data.result[1]).toFixed(2))
+                                        $("#temperature").text(local_1 + " C");
 				      });
       }
     });
@@ -47,8 +49,10 @@ $(function() {
                                 $.getJSON($SCRIPT_ROOT + '/_guessEnergy', {
                                         euro: cost
                                       }, function(data) {
-                                        $("#cost").text((data.result[0] * tarif_costs) + " EUR");
-                                        $("#temperature").text((data.result[1]) + " EUR");
+					var local_0 = Number((data.result[0] * tarif_costs).toFixed(2))
+                                        $("#cost").text(local_0 + " EUR");
+					var local_1 = Number((data.result[1]).toFixed(2))
+                                        $("#temperature").text(local_1 + " C");
                                       });
 
 			cost = Number((cost).toFixed(2));
