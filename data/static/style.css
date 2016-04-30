@@ -14,7 +14,7 @@
 }
 #gauge{
 	width:400px;
-	height:120px;
+	height:80px;
 	float:right;
 	margin-top:0px;
 }
@@ -109,8 +109,8 @@ body{
   margin-right: 10px;
   display: block;
   float: left;
-  height: 100%;
-  width: 150px;
+  height: 100vh;
+  width: 220px;
 	background-color: #FF1C01;
 }
 
