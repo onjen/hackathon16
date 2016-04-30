@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from plotData import get_arrays
-from weatherIntegration import getJSONMeanTemperatures
+from weatherIntegration import getJSON
 """
     WebApp Viessmann
     ~~~~~~~~~~~~~~

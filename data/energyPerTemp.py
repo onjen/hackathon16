@@ -74,6 +74,14 @@ def getRegressionFor(x, y, xp):
     p = np.poly1d(z)
     return p(xp)
 
+def getRegressionAt(xp):
+    data = readData()
+    x = np.array(data['temps'])
+    y = np.array(data['kwh'])
+    z = np.polyfit(x, y, 1)
+    p = np.poly1d(z)
+    return p(xp)
+
 def main():
     data = readData();
     x = np.array(data['temps'])
