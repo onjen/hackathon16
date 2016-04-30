@@ -13,7 +13,7 @@ for i in xrange(1, 6):
                 continue
             date = int(time.mktime(time.strptime(row[0], "%Y-%m-%d %H:%M:%S")))
             outdoor = float(row[1])
-            target = float(row[1])
+            target = float(row[2])
             kwh = float(row[3])
 
             conn.execute("INSERT INTO DATA (TIME, OUTDOOR, TARGET, ENERGY) VALUES (" + str(date) + "," + str(outdoor) + "," + str(target) + "," + str(kwh) + ")");
