@@ -24,7 +24,7 @@
           minorTicks: 5,
 	  greenFrom: 15, greenTo: 25,
 	  animation:{
-		  duration:20000,
+		  duration:2000,
 		  easing:'linear',
 	  },
 	  max:40,
@@ -38,15 +38,15 @@
         setInterval(function() {
           data.setValue(0, 1, 5 + Math.round(20 * Math.random()));
           chart.draw(data, options);
-        }, 6500);
+        }, 5000);
         setInterval(function() {
           data.setValue(1, 1, 5 + Math.round(20 * Math.random()));
           chart.draw(data, options);
-        }, 5000);
+        }, 4000);
         setInterval(function() {
           data.setValue(2, 1, 10 + Math.round(5 * Math.random()));
           chart.draw(data, options);
-        }, 13000);
+        }, 10000);
 
 
 
