@@ -1,4 +1,5 @@
 import pyowm
+import datetime
 import matplotlib.pyplot as plt
 import json
 from energyPerTemp import getRegressionAt
@@ -27,12 +28,17 @@ def getRegressionEnergy():
     
 def getJSON():
     dump = []
+    count = 0
     temps = getMeanTemperatures()
     energies = getRegressionEnergy()
+    day = datetime.datetime.today()
     for i in range(0,len(temps)):
         if energies[i] < 0:
             energies[i] = 0
-        dump.append({"temperature": temps[i], "energy": energies[i]})
+        day_string = day.strftime("%A")
+        dump.append({"day":day_string, "temperature": temps[i], "energy": energies[i]})
+        print day
+        day = day + datetime.timedelta(days=1)
     return dump
 
 def main():
