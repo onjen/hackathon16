@@ -23,7 +23,6 @@ def get_arrays(filename, days):
             cur_dic = { "count": count, "outdoor": row[1], "target": row[2], "kwh": row[3] } 
             json.append( cur_dic )
             count += 1
-    print(json)
     return {'outdoor':outdoor, 'kwh':kwh, 'target':target, 'json':json}
 
 
