@@ -44,6 +44,11 @@ def temperatures():
 def vorhersage():
     return render_template('vorhersage.html', title='vorhersage')
 
+@app.route('/Verhalten')
+def verhalten():
+    return render_template('verhalten.html')
+
+
 if __name__ == '__main__':
     app.debug = True
     app.run('0.0.0.0')

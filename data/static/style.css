@@ -131,7 +131,13 @@ li a {
   text-decoration: none;
   color: white;
 }
+
 li a:hover {
   text-decoration: underline;
 }
 
+#slider {
+  margin-left: 300px;
+	margin-right: 25px;
+  /*float:left;*/
+}
