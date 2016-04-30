@@ -1,99 +1,11 @@
 {% extends "layout.html" %}
 {% block body %}
-
-    <script type="text/javascript">
-    
-    // Load the Visualization API and the piechart package.
-    google.charts.load('current', {'packages':['corechart']});
-      
-    // Set a callback to run when the Google Visualization API is loaded.
-    google.charts.setOnLoadCallback(drawChart);
-      
-
-
-    function drawChart() {
-//      var jsonData = $.ajax({
-//          url: "\\Anlage1",
-//          dataType: "json",
-//          async: false
-//          }).responseText;
-//          
-//      // Create our data table out of JSON data loaded from server.
-//      var tableData = new google.visualization.DataTable();
-//
-//      tableData.addColumn('number', 'Kwh');
-//      tableData.addColumn('number', 'Outdoor');
-//      tableData.addColumn('number', 'Target');
-
-
-
-      $.getJSON('\\Anlage1', function(data) {
-          var tableData = new google.visualization.DataTable();
-
-          tableData.addColumn('number', 'Count');
-          tableData.addColumn('number', 'Kwh');
-          tableData.addColumn('number', 'Outdoor');
-          tableData.addColumn('number', 'Target');
-
-          $.each(data, function(index) {
-              tableData.addRow([
-                parseFloat(data[index].count),
-                parseFloat(data[index].kwh),
-                parseFloat(data[index].outdoor),
-                parseFloat(data[index].target)
-            ]);
-          });
-
-
-
-          var materialOptions = {
-            chart: {
-              title: 'Average Temperatures and Daylight in Iceland Throughout the Year'
-            },
-            width: 900,
-            height: 500,
-            series: {
-              // Gives each series an axis name that matches the Y-axis below.
-              0: {axis: 'Count'},
-            },
-            axes: {
-              // Adds labels to each axis; they don't have to match the axis names.
-              y: {
-                Kwh: {label: 'Kwh'},
-                Outdoor: {label: 'Outdoor'},
-                Target: {label: 'Target'},
-                Daylight: {label: 'Daylight'}
-              }
-            }
-          };
-    
-    
-          // Instantiate and draw our chart, passing in some options.
-          var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
-          chart.draw(tableData, materialOptions);
-    
-          });
-
-//      $.each(jsonData, function (i, row) {
-//            document.write(i);
-//            data.addRow([
-//              parseFloat(row.kwh),
-//              parseFloat(row.outdoor),
-//              parseFloat(row.target)
-//            ]);
-//            if (i >= 1000)
-//               return false;
-//          });
-
-    }
-
-
-</script>
 <div id="header">
 	<h1 style="float:left">Heating Manager</h1>
 	<div id="gauge"></div>
 	<img id="logo" src="static/Viessmann_Logo.jpg">
 </div>
+<div id="chart_div"></div>
 <div id="nav">
 <input class="burger-check" id="burger-check" type="checkbox">
 <label for="burger-check" class="burger"></label>

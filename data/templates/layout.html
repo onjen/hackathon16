@@ -2,13 +2,13 @@
 <title>jQuery Example</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 <script type="text/javascript"
-  src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+  src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script type="text/javascript">
   var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
 </script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
-      google.charts.load('current', {'packages':['gauge']});
+      google.charts.load('current', {'packages':['gauge', 'corechart']});
       google.charts.setOnLoadCallback(drawChart);
       function drawChart() {
 
@@ -47,6 +47,54 @@
           data.setValue(2, 1, 10 + Math.round(5 * Math.random()));
           chart.draw(data, options);
         }, 13000);
+
+
+
+      $.getJSON('\\Anlage1', function(data) {
+          var tableData = new google.visualization.DataTable();
+
+          tableData.addColumn('number', 'Count');
+          tableData.addColumn('number', 'Kwh');
+          tableData.addColumn('number', 'Outdoor');
+          tableData.addColumn('number', 'Target');
+
+          $.each(data, function(index) {
+              tableData.addRow([
+                parseFloat(data[index].count),
+                parseFloat(data[index].kwh),
+                parseFloat(data[index].outdoor),
+                parseFloat(data[index].target)
+            ]);
+          });
+
+
+
+          var materialOptions = {
+            chart: {
+              title: 'Average Temperatures and Daylight in Iceland Throughout the Year'
+            },
+            width: 900,
+            height: 500,
+            series: {
+              // Gives each series an axis name that matches the Y-axis below.
+              0: {axis: 'Count'},
+            },
+            axes: {
+              // Adds labels to each axis; they don't have to match the axis names.
+              y: {
+                Kwh: {label: 'Kwh'},
+                Outdoor: {label: 'Outdoor'},
+                Target: {label: 'Target'},
+                Daylight: {label: 'Daylight'}
+              }
+            }
+          };
+ 
+          // Instantiate and draw our chart, passing in some options.
+          var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+          chart.draw(tableData, materialOptions);
+
+          });
       }
 </script>
 
