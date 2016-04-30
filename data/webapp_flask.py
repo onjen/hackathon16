@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from plotData import get_arrays
+from weatherIntegration import getJSONMeanTemperatures
 """
     WebApp Viessmann
     ~~~~~~~~~~~~~~
@@ -31,6 +32,12 @@ def anlage3():
     string = '[' + ', '.join(str(e) for e in arrays['json']) + ']'
     string = string.replace('\'', '\"')
     return string
+
+@app.route('/Temperatures')
+def temperatures():
+    temperatures = getJSONMeanTemperatures()
+    print temperatures
+    return temperatures
 
 @app.route('/Vorhersage')
 def vorhersage():

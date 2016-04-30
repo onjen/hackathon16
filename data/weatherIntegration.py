@@ -1,5 +1,6 @@
 import pyowm
 import matplotlib.pyplot as plt
+import json
 
 def getMeanTemperatures():
     owm = pyowm.OWM('d95b2187ecedb799b74c2697226b234e')
@@ -12,9 +13,12 @@ def getMeanTemperatures():
         temperature = weather.get_temperature('celsius')
         mean_temp = (temperature['min']+temperature['max'])/2
         mean_temperatures.append(mean_temp)
-        print mean_temp
     return mean_temperatures
     
+def getJSONMeanTemperatures():
+    dump = json.dumps(getMeanTemperatures())
+    return dump
+
 def main():
     mean_temperatures = getMeanTemperatures()
     plt.plot(mean_temperatures)
