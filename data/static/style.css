@@ -154,9 +154,14 @@ li a:hover {
     height: 150px;    
 		float: left;
 }
-
 #slider_cost {
   margin-left: 300px;
 	margin-right: 25px;
   /*float:left;*/
+.heading{
+	font-family: sans-serif;
+	color: #222; 
+	text-align: left;
+	margin-left: 400px;
+	margin-top: 50px;
 }
